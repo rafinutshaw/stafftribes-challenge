@@ -2,9 +2,9 @@ import ToggleGrid from "./generic-components/toggle-grid/toggle-grid";
 
 export default function Calender() {
     return (
-        <div className="p-4">
-            <div className="flex justify-between">
-                <h2 className="text-2xl font-bold leading-7 pb-2 uppercase">MY FRIends</h2>
+        <div className="p-4 app-section">
+            <div className="flex justify-between items-center  pb-4">
+                <h2 className="text-2xl font-bold uppercase">MY FRIends</h2>
                 <ToggleGrid values={["Just for fun", "More serious"]} selected="Just for fun" />
             </div>
 
@@ -14,25 +14,25 @@ export default function Calender() {
                         <div className="overflow-hidden">
                             <table className="min-w-full text-center text-sm font-light">
                                 <thead
-                                    className="border-b bg-neutral-50 font-medium dark:border-neutral-500 dark:text-neutral-800">
+                                    className="border-b bg-neutral-100 font-medium">
                                     <tr>
-                                        <th scope="col" className="text-left px-6 py-4">Name</th>
-                                        <th scope="col" className="text-left px-6 py-4">Availability</th>
-                                        <th scope="col" className="text-left px-6 py-4">Action</th>
+                                        <th scope="col" className="text-left px-6  py-2">Name</th>
+                                        <th scope="col" className="text-left px-6  py-2">Availability</th>
+                                        <th scope="col" className="text-left px-6  py-2">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr className="border-b dark:border-neutral-500">
-                                        <td className="whitespace-nowrap text-left px-6 py-4">Mark</td>
-                                        <td className="whitespace-nowrap text-left px-6 py-4">Monday</td>
-                                        <td className="whitespace-nowrap text-left px-6 py-4">
+                                    <tr className="border-b ">
+                                        <td className="whitespace-nowrap text-left px-6  py-2">Mark</td>
+                                        <td className="whitespace-nowrap text-left px-6  py-2">Monday</td>
+                                        <td className="whitespace-nowrap text-left px-6  py-2">
                                             <button type="button" className="btn-outline">View</button>
                                         </td>
                                     </tr>
-                                    <tr className="border-b dark:border-neutral-500">
-                                        <td className="whitespace-nowrap text-left px-6 py-4 ">Jacob</td>
-                                        <td className="whitespace-nowrap text-left px-6 py-4">Thornton</td>
-                                        <td className="whitespace-nowrap text-left px-6 py-4">
+                                    <tr className="border-b">
+                                        <td className="whitespace-nowrap text-left px-6  py-2 ">Jacob</td>
+                                        <td className="whitespace-nowrap text-left px-6  py-2">Thornton</td>
+                                        <td className="whitespace-nowrap text-left px-6  py-2">
                                             <button type="button" className="btn-outline">View</button>
                                         </td>
                                     </tr>
