@@ -26,7 +26,7 @@ $thumb-size: 16px;
   position: relative;
   display: flex;
   align-items: center;
-  margin: 40px calc(#{$thumb-size} / 2);
+  margin: 40px calc(#{$thumb-size + 8px});
   margin-top: 14px;
   padding-top: 1.6rem;
   height: calc(#{$thumb-size} + 1.6rem);

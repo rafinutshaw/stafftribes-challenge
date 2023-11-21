@@ -130,9 +130,9 @@ export default function IntervalsSlider({ min, max, value, step, onChange }: any
                             className="inner-rail"
                             style={{ left: `${minPos2}%`, right: `${100 - maxPos2}%` }}
                         />}
-                    <div className="-mx-1.5">
+                    <div className="-mx-5">
                         <div className="flex justify-between pt-2">
-                            {[...Array((max - min + 1) / step)].map((_, index) => <div className="w-3 text-center" key={index}>{(index + 1) * step}</div>)}
+                            {[...Array((max - min + 1) / step)].map((_, index) => <div className="w-10 text-center text-gray-400 text-sm whitespace-nowrap" key={index}>Day {(index + 1) * step}</div>)}
                         </div>
                     </div>
                 </div>
