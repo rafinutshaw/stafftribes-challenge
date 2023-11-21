@@ -1,6 +1,9 @@
+import { useState } from "react";
+import IntervalsSlider from "./generic-components/intervals-slider/intervals-slider";
 import ToggleGrid from "./generic-components/toggle-grid/toggle-grid";
 
 export default function Calender() {
+    const [value, setValue] = useState({ min: 0, max: 100 });
     return (
         <div className="p-4 app-section">
             <div className="flex justify-between items-center  pb-4">
@@ -43,7 +46,7 @@ export default function Calender() {
                     </div>
                 </div>
             </div>
-
+            <IntervalsSlider min={0} max={100} step={5} value={value} onChange={setValue} />
         </div>
     )
 }
