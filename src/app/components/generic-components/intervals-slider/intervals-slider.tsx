@@ -71,7 +71,7 @@ export default function IntervalsSlider({ min, max, value, step, onChange }: any
     const maxPos2 = ((maxValue2 - min) / (max - min)) * 100;
 
     return (
-        <div className="wrapper">
+        <div className="wrapper w-full">
             <div className="input-wrapper">
                 <input
                     className="input"
