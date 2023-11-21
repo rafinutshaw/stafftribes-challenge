@@ -7,24 +7,19 @@ $thumb-size: 16px;
 }
 
 @mixin thumb-styles {
-  appearance: none;
+  // appearance: none;
   pointer-events: all;
   width: $thumb-size;
   height: $thumb-size;
   border-radius: 0px;
   border: 0 none;
   cursor: grab;
+  padding-top: 60px;
   background-color: red;
 
   &:active {
     cursor: grabbing;
   }
-}
-
-#root {
-  max-width: 500px;
-  padding: 12px;
-  margin: auto;
 }
 
 .wrapper {
@@ -99,7 +94,7 @@ $thumb-size: 16px;
 .inner-rail {
   position: absolute;
   height: 100%;
-  background: hotpink;
+  background: blue;
   opacity: 0.5;
 }
 
@@ -108,7 +103,7 @@ $thumb-size: 16px;
   height: $thumb-size;
   border-radius: 50%;
   position: absolute;
-  background: hotpink;
+  background: blue;
   top: 50%;
   margin-left: calc(#{$thumb-size} / -2);
   transform: translate3d(0, -50%, 0);
