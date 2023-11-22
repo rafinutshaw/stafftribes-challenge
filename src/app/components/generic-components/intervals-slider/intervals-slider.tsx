@@ -1,23 +1,14 @@
 import { useEffect, useState } from "react";
 import './style.scss'
+import { IntervalProps, IntervalsSliderProps } from "./intervals-slider.types";
 
-type StateProps = {
-    minValue: number;
-    minValue2: number;
-    maxValue: number;
-    maxValue2: number;
-};
-
-
-export default function IntervalsSlider({ min, max, value, step, onChange }: any) {
-    const [state, setState] = useState<StateProps>({ minValue: value[0].min, maxValue: value[0].max, minValue2: value.length == 1 ? 0 : value[1].min, maxValue2: value.length == 1 ? 0 : value[1].max });
-    const { minValue, maxValue, minValue2, maxValue2 } = state;
+export default function IntervalsSlider({ min, max, value, step, onChange }: IntervalsSliderProps) {
+    const [state, setState] = useState<IntervalProps>(value);
+    const { minValue1, maxValue1, minValue2 = 0, maxValue2 = 0 } = state;
 
     useEffect(() => {
-        if (value) {
-            setState({ minValue: value[0].min, maxValue: value[0].max, minValue2: value.length == 1 ? 0 : value[1].min, maxValue2: value.length == 1 ? 0 : value[1].max })
-        }
-    }, []);
+        setState(value)
+    }, [value])
 
     const handleChange = (newMin: number, newMax: number) => {
         let newState = { ...state }
@@ -36,10 +27,10 @@ export default function IntervalsSlider({ min, max, value, step, onChange }: any
             }
             newState.minValue2 = minValue2 + step
         }
-        newState.minValue = newMin;
-        newState.maxValue = newMax;
+        newState.minValue1 = newMin;
+        newState.maxValue1 = newMax;
         setState(newState)
-        // onChange({ min: newMin, max: newMax });
+        onChange(newState)
     };
 
     const handleChange2 = (newMin: number, newMax: number) => {
@@ -50,23 +41,23 @@ export default function IntervalsSlider({ min, max, value, step, onChange }: any
         if (newMax <= newMin && newMin > min) {
             newMin -= step
         }
-        if (newMin <= newState.maxValue) {
-            if (newState.maxValue == (min + step)) {
+        if (newMin <= newState.maxValue1) {
+            if (newState.maxValue1 == (min + step)) {
                 return;
             }
-            if ((newState.maxValue - step) == newState.minValue) {
-                newState.minValue = newState.minValue - step
+            if ((newState.maxValue1 - step) == newState.minValue1) {
+                newState.minValue1 = newState.minValue1 - step
             }
-            newState.maxValue = newState.maxValue - step
+            newState.maxValue1 = newState.maxValue1 - step
         }
         newState.minValue2 = newMin
         newState.maxValue2 = newMax
         setState(newState)
-        // onChange({ min: newMin, max: newMax });
+        onChange(newState)
     };
 
-    const minPos = ((minValue - min) / (max - min)) * 100;
-    const maxPos = ((maxValue - min) / (max - min)) * 100;
+    const minPos = ((minValue1 - min) / (max - min)) * 100;
+    const maxPos = ((maxValue1 - min) / (max - min)) * 100;
     const minPos2 = ((minValue2 - min) / (max - min)) * 100;
     const maxPos2 = ((maxValue2 - min) / (max - min)) * 100;
 
@@ -76,20 +67,20 @@ export default function IntervalsSlider({ min, max, value, step, onChange }: any
                 <input
                     className="input"
                     type="range"
-                    value={minValue}
+                    value={minValue1}
                     min={min}
                     max={max}
                     step={step}
-                    onChange={(e) => handleChange(+e.target.value, maxValue)}
+                    onChange={(e) => handleChange(+e.target.value, maxValue1)}
                 />
                 <input
                     className="input"
                     type="range"
-                    value={maxValue}
+                    value={maxValue1}
                     min={min}
                     max={max}
                     step={step}
-                    onChange={(e) => handleChange(minValue, +e.target.value)}
+                    onChange={(e) => handleChange(minValue1, +e.target.value)}
                 />
                 {(minValue2 != maxValue2) && <> <input
                     className="input"
@@ -113,9 +104,9 @@ export default function IntervalsSlider({ min, max, value, step, onChange }: any
 
             <div className="control-wrapper">
                 <div className="control" style={{ left: `${minPos}%` }} >
-                    <div className="range-thumb" >{minValue}</div>
+                    <div className="range-thumb" >{minValue1}</div>
                 </div>
-                <div className="control" style={{ left: `${maxPos}%` }} > <div className="range-thumb" >{maxValue}</div></div>
+                <div className="control" style={{ left: `${maxPos}%` }} > <div className="range-thumb" >{maxValue1}</div></div>
                 {(minValue2 != maxValue2) && <>  <div className="control" style={{ left: `${minPos2}%` }} > <div className="range-thumb" >{minValue2}</div></div>
                     <div className="control" style={{ left: `${maxPos2}%` }} > <div className="range-thumb" >{maxValue2}</div></div></>}
 
