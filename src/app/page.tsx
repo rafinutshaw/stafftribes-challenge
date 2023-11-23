@@ -2,9 +2,10 @@
 import { useEffect, useState } from "react";
 import Calender from "./components/calender";
 import Friends from "./components/friends/friends";
-import { getMyAvailability, getMyFriendsAvailability, updateMyAvailability } from "./service/app-service";
-import { AvailabilityType } from "./types/shared.types";
 import { FriendAvailability } from "./components/friends/friends.types";
+import { getMyAvailability, getMyFriendsAvailability, updateMyAvailability } from "./service/app-service";
+import { populateData } from "./service/service.helper";
+import { AvailabilityType } from "./types/shared.types";
 
 export default function Home() {
 
@@ -12,6 +13,7 @@ export default function Home() {
   const [friendsAvailability, setFriendsAvailability] = useState<FriendAvailability[]>();
 
   useEffect(() => {
+    populateData()
     fetchData()
   }, [])
 

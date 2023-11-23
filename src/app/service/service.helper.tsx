@@ -46,16 +46,25 @@ const FRIENDSAVAILABILITY = [
     }
 ]
 
+export const populateData = () => {
+    if (localStorage.getItem('friendsAvailability') == null) {
+        localStorage.setItem('friendsAvailability', JSON.stringify(FRIENDSAVAILABILITY))
+    }
+    if (localStorage.getItem('myAvailability') == null) {
+        localStorage.setItem('myAvailability', JSON.stringify(AVAILABILITY))
+    }
+}
+
 export const getAvailabilityData = () => {
-    return AVAILABILITY
+    return JSON.parse(localStorage.getItem('myAvailability') || '')
 }
 
 export const setAvailabilityData = (data: AvailabilityType[]) => {
-    AVAILABILITY = data
-    return AVAILABILITY
+    localStorage.setItem('myAvailability', JSON.stringify(data))
+    return data
 }
 
-export const getMyFriendsAvailabilityData = () => FRIENDSAVAILABILITY
+export const getMyFriendsAvailabilityData = () => JSON.parse(localStorage.getItem('friendsAvailability') || '')
 
 const calculateOverlap = (intervals: any) => {
     if (intervals[0][0] != intervals[0][1] &&
