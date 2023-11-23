@@ -18,8 +18,6 @@
     .app-section {
         @apply border border-gray-200 rounded-lg shadow mb-6;
     }
-
-    /* ... */
 }
 
 

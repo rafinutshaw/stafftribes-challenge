@@ -1,6 +1,6 @@
 'use client'
 import Calender from "./components/calender";
-import Friends from "./components/friends";
+import Friends from "./components/friends/friends";
 
 export default function Home() {
   return (
