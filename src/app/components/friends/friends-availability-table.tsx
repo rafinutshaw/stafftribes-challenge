@@ -14,15 +14,16 @@ export default function FriendsAvailabilityTable({ availabilityData }: any) {
                             </tr>
                         </thead>
                         <tbody>
-                            {availabilityData?.map((data: any, index: number) => <tr key={index} className="border-b ">
+                            {availabilityData?.length > 0 && availabilityData?.map((data: any, index: number) => <tr key={index} className="border-b ">
                                 <td className="whitespace-nowrap text-left px-6  py-2">{data.name}</td>
                                 <td className="whitespace-nowrap text-left px-6  py-2">{data.week}</td>
                                 <td className="whitespace-nowrap text-left px-6  py-2">
                                     <button type="button" className="btn-outline">View</button>
                                 </td>
                             </tr>)}
-
-
+                            {availabilityData?.length == 0 && <tr className="border-b ">
+                                <td colSpan={3} className="whitespace-nowrap text-left px-6 text-center py-2">No matches found</td>
+                            </tr>}
                         </tbody>
                     </table>
                 </div>
