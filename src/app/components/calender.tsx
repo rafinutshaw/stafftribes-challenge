@@ -28,7 +28,7 @@ export default function Calender(props: any) {
 
     useEffect(() => {
         console.log(myAvailability)
-        if (myAvailability.length > 0)
+        if (myAvailability?.length > 0)
             populateAvailability()
     }, [myAvailability])
 

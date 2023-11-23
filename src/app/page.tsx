@@ -4,35 +4,32 @@ import Calender from "./components/calender";
 import Friends from "./components/friends/friends";
 import { getMyAvailability, getMyFriendsAvailability, updateMyAvailability } from "./service/app-service";
 import { AvailabilityType } from "./types/shared.types";
-import { CategoriedFriendsAvailability } from "./components/friends/friends.types";
+import { CategoriedFriendsAvailability, FriendAvailability } from "./components/friends/friends.types";
 
 export default function Home() {
 
-  const [state, setState] = useState<any>({
-    myAvailability: {},
-    friendsAvailability: {}
-  });
+  const [myAvailability, setMyAvailability] = useState<AvailabilityType[]>();
+  const [friendsAvailability, setFriendsAvailability] = useState<FriendAvailability[]>();
 
   useEffect(() => {
-    setState({
-      myAvailability: getMyAvailability(),
-      friendsAvailability: getMyFriendsAvailability()
-    })
+    fetchData()
   }, [])
+
+  const fetchData = () => {
+    setMyAvailability(getMyAvailability())
+    setFriendsAvailability(getMyFriendsAvailability())
+
+  }
 
   const onAvailabilityUpdate = (data: any) => {
     updateMyAvailability(data)
-    setState({
-      myAvailability: getMyAvailability(),
-      friendsAvailability: getMyFriendsAvailability()
-    })
-
+    fetchData()
   }
 
   return (
     <main className="flex min-h-screen flex-col p-5 min-w-screen">
-      <Friends friendsAvailability={state.friendsAvailability} />
-      <Calender myAvailability={state.myAvailability} onUpdate={onAvailabilityUpdate} />
+      {friendsAvailability && <Friends friendsAvailability={friendsAvailability} />}
+      {myAvailability && <Calender myAvailability={myAvailability} onUpdate={onAvailabilityUpdate} />}
     </main>
   )
 }

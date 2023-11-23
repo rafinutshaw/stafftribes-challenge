@@ -11,3 +11,10 @@ export type DaysAvailability = {
     name: string,
     days: number
 }
+export type FriendsProps = {
+    friendsAvailability: FriendAvailability[]
+}
+
+export type FriendAvailability = {
+    category: number, weeks: [], bestWeek: number
+}

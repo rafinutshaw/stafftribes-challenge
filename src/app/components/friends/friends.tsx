@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { CategoriedFriendsAvailability, DaysAvailability } from "./friends.types";
+import { CategoriedFriendsAvailability, DaysAvailability, FriendsProps } from "./friends.types";
 import ToggleGrid from "../generic-components/toggle-grid/toggle-grid";
 import { getMyFriendsAvailability } from "@/app/service/app-service";
 import { ValueType } from "../generic-components/toggle-grid/toggle-grid.types";
 import FriendsAvailabilityTable from "./friends-availability-table";
 
-export default function Friends(props: any) {
+export default function Friends(props: FriendsProps) {
 
     const { friendsAvailability } = props
     const [state, setState] = useState<CategoriedFriendsAvailability>()
@@ -14,7 +14,7 @@ export default function Friends(props: any) {
     const [selectedWeek, setSelectedWeek] = useState<number>(-1)
 
     useEffect(() => {
-        if (friendsAvailability.length > 0)
+        if (friendsAvailability?.length > 0)
             updatefriendsAvailability()
     }, [friendsAvailability])
 
