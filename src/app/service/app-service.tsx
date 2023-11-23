@@ -119,4 +119,5 @@ export const getMyAvailability = () => {
 
 export const updateMyAvailability = (value: AvailabilityType[]) => {
     AVAILABILITY = value
+    return value
 }

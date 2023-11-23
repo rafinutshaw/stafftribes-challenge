@@ -5,7 +5,8 @@ import { Controller, useForm } from "react-hook-form";
 import { getMyAvailability, updateMyAvailability } from "../service/app-service";
 import { AvailabilityType } from "../types/shared.types";
 
-export default function Calender() {
+export default function Calender(props: any) {
+    const { myAvailability, onUpdate } = props
     const defaultValues: AvailabilityType[] = [
         { minValue1: 1, maxValue1: 7, minValue2: 0, maxValue2: 0, enabled: true },
         { minValue1: 1, maxValue1: 7, minValue2: 0, maxValue2: 0, enabled: true },
@@ -24,16 +25,19 @@ export default function Calender() {
     const { register, getValues, setValue, control, watch, handleSubmit, formState: { isDirty }, reset } = methods
     const formValues = watch()
     useEffect(() => {
-        fetchAvailability()
-    }, [])
+        console.log(myAvailability)
+        if (myAvailability.length > 0)
+            populateAvailability()
+    }, [myAvailability])
 
-    const fetchAvailability = () => {
-        setValue('week.value', getMyAvailability())
+    const populateAvailability = () => {
+        console.log(myAvailability)
+        setValue('week.value', myAvailability)
 
     }
 
     const onSubmit = (data: any) => {
-        updateMyAvailability(data.week.value);
+        onUpdate(data.week.value)
         reset(data)
     };
 

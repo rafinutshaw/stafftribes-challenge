@@ -1,35 +1,52 @@
 import { useEffect, useState } from "react";
-import { CategoriedFriendsAvailability } from "./friends.types";
+import { CategoriedFriendsAvailability, DaysAvailability } from "./friends.types";
 import ToggleGrid from "../generic-components/toggle-grid/toggle-grid";
 import { getMyFriendsAvailability } from "@/app/service/app-service";
 import { ValueType } from "../generic-components/toggle-grid/toggle-grid.types";
 
-export default function Friends() {
+export default function Friends(props: any) {
+
+    const { friendsAvailability } = props
     const [state, setState] = useState<CategoriedFriendsAvailability>()
     const [categoryType, setCategoryType] = useState<number>(1)
     const categoryNames = [{ label: "Just for fun", value: 1 }, { label: "More serious", value: 2 }]
-    const [slectedWeek, setSelectedWeek] = useState<number>(-1)
+    const [selectedWeek, setSelectedWeek] = useState<number>(-1)
     useEffect(() => {
-        fetchFriendsAvailability()
-    }, [])
+        if (friendsAvailability.length > 0)
+            updatefriendsAvailability()
+    }, [friendsAvailability])
 
-    const fetchFriendsAvailability = () => {
-        const response = getMyFriendsAvailability()
+    const updatefriendsAvailability = () => {
         let result: any = {};
-        response.forEach(({ category, weeks, bestWeek }: any) => {
+        friendsAvailability.forEach(({ category, weeks, bestWeek }: any) => {
             if (category == 1) {
                 result.justForFun = { weeks, bestWeek }
             } else {
                 result.moreSerious = { weeks, bestWeek }
             }
         });
+        console.log(friendsAvailability)
         setState(result)
-        console.log(result)
-
     }
 
     const getAvailabilityData = () => {
-        categoryType == 1 ? state?.justForFun : state?.moreSerious;
+        let availabilityData = categoryType == 1 ? state?.justForFun : state?.moreSerious;
+        if (selectedWeek == -1) {
+            let data = new Map()
+            availabilityData?.weeks.forEach((week, weekIndex) => {
+                week.forEach((item) => {
+                    data.set(item.name, data.has(item.name) ? [...data.get(item.name), weekIndex + 1] : [weekIndex + 1])
+                })
+            })
+            let result: any = []
+            data.forEach((value, key) => {
+                result.push({ name: key, week: 'Week ' + value.join(', ') })
+            })
+            return result
+        }
+        return availabilityData?.weeks[selectedWeek == 7 ? availabilityData?.bestWeek : selectedWeek].map((item) => {
+            return { name: item.name, week: 'Week ' + (selectedWeek == 7 ? availabilityData?.bestWeek || 0 + 1 : selectedWeek + 1) }
+        });
 
     }
 
@@ -64,10 +81,10 @@ export default function Friends() {
 
             </div>
             <div>
-                <div className="flex py-4"><span className="mr-2">Available for:</span>   <ToggleGrid name={'availablefor'} values={categoryNames} selected={1} onChange={setCategoryType} /></div>
+                <div className="flex py-4"><span className="mr-2">Available for:</span>   <ToggleGrid name={'availablefor'} values={categoryNames} selected={categoryType} onChange={setCategoryType} /></div>
                 <div className="flex py-4 items-center">
                     <span className="mr-2">Available on:</span>
-                    <ToggleGrid name={'availableon'} values={getAvailableOnValues()} selected={slectedWeek} onChange={setSelectedWeek} />
+                    <ToggleGrid name={'availableon'} values={getAvailableOnValues()} selected={selectedWeek} onChange={setSelectedWeek} />
 
                     <select id="countries" className="ml-2 bg-white border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
                         onChange={(e) => setSelectedWeek(parseInt(e.target.value))}
@@ -92,21 +109,14 @@ export default function Friends() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* {getAvailabilityData.} */}
-                                    <tr className="border-b ">
-                                        <td className="whitespace-nowrap text-left px-6  py-2">Mark</td>
-                                        <td className="whitespace-nowrap text-left px-6  py-2">Monday</td>
+                                    {getAvailabilityData()?.map((data: any, index: number) => <tr key={index} className="border-b ">
+                                        <td className="whitespace-nowrap text-left px-6  py-2">{data.name}</td>
+                                        <td className="whitespace-nowrap text-left px-6  py-2">{data.week}</td>
                                         <td className="whitespace-nowrap text-left px-6  py-2">
                                             <button type="button" className="btn-outline">View</button>
                                         </td>
-                                    </tr>
-                                    <tr className="border-b">
-                                        <td className="whitespace-nowrap text-left px-6  py-2 ">Jacob</td>
-                                        <td className="whitespace-nowrap text-left px-6  py-2">Thornton</td>
-                                        <td className="whitespace-nowrap text-left px-6  py-2">
-                                            <button type="button" className="btn-outline">View</button>
-                                        </td>
-                                    </tr>
+                                    </tr>)}
+
 
                                 </tbody>
                             </table>

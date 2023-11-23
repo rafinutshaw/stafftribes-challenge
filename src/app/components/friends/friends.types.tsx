@@ -7,7 +7,7 @@ export type FriendsType = {
     weeks: DaysAvailability[][]
 }
 
-type DaysAvailability = {
+export type DaysAvailability = {
     name: string,
     days: number
 }
