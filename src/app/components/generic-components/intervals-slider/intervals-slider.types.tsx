@@ -5,4 +5,4 @@ export type IntervalProps = {
     maxValue2: number
 }
 
-export type IntervalsSliderProps = { min: number, max: number, value: IntervalProps, step: number, onChange: (arg0: IntervalProps) => void }
+export type IntervalsSliderProps = { min: number, max: number, value: IntervalProps, step: number, onChange: (arg0: IntervalProps) => void, disabled?: boolean }

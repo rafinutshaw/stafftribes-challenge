@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import './style.scss'
 import { IntervalProps, IntervalsSliderProps } from "./intervals-slider.types";
 
-export default function IntervalsSlider({ min, max, value, step, onChange }: IntervalsSliderProps) {
+export default function IntervalsSlider({ min, max, value, step, onChange, disabled = false }: IntervalsSliderProps) {
     const [state, setState] = useState<IntervalProps>(value);
     const { minValue1, maxValue1, minValue2 = 0, maxValue2 = 0 } = state;
 
@@ -71,6 +71,7 @@ export default function IntervalsSlider({ min, max, value, step, onChange }: Int
                     min={min}
                     max={max}
                     step={step}
+                    disabled
                     onChange={(e) => handleChange(+e.target.value, maxValue1)}
                 />
                 <input
@@ -80,6 +81,7 @@ export default function IntervalsSlider({ min, max, value, step, onChange }: Int
                     min={min}
                     max={max}
                     step={step}
+                    disabled
                     onChange={(e) => handleChange(minValue1, +e.target.value)}
                 />
                 {(minValue2 != maxValue2) && <> <input
@@ -89,6 +91,7 @@ export default function IntervalsSlider({ min, max, value, step, onChange }: Int
                     min={min}
                     max={max}
                     step={step}
+                    disabled
                     onChange={(e) => handleChange2(+e.target.value, maxValue2)}
                 />
                     <input
@@ -97,18 +100,19 @@ export default function IntervalsSlider({ min, max, value, step, onChange }: Int
                         value={maxValue2}
                         min={min}
                         max={max}
+                        disabled
                         step={step}
                         onChange={(e) => handleChange2(minValue2, +e.target.value)}
                     /></>}
             </div>
 
-            <div className="control-wrapper">
+            <div className={`control-wrapper ${disabled ? 'disabled' : ''}`}>
                 <div className="control" style={{ left: `${minPos}%` }} >
-                    <div className="range-thumb" >{minValue1}</div>
+                    <div className="thumb" >{minValue1}</div>
                 </div>
-                <div className="control" style={{ left: `${maxPos}%` }} > <div className="range-thumb" >{maxValue1}</div></div>
-                {(minValue2 != maxValue2) && <>  <div className="control" style={{ left: `${minPos2}%` }} > <div className="range-thumb" >{minValue2}</div></div>
-                    <div className="control" style={{ left: `${maxPos2}%` }} > <div className="range-thumb" >{maxValue2}</div></div></>}
+                <div className="control" style={{ left: `${maxPos}%` }} > <div className="thumb" >{maxValue1}</div></div>
+                {(minValue2 != maxValue2) && <>  <div className="control" style={{ left: `${minPos2}%` }} > <div className="thumb" >{minValue2}</div></div>
+                    <div className="control" style={{ left: `${maxPos2}%` }} > <div className="thumb" >{maxValue2}</div></div></>}
 
 
                 <div className="rail">

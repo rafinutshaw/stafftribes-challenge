@@ -20,6 +20,8 @@ $thumb-size: 16px;
   &:active {
     cursor: grabbing;
   }
+
+
 }
 
 .wrapper {
@@ -71,6 +73,7 @@ $thumb-size: 16px;
     @include thumb-styles;
   }
 
+
   &::-moz-range-thumb {
     @include thumb-styles;
   }
@@ -80,26 +83,24 @@ $thumb-size: 16px;
   }
 }
 
-;
-
-.rail {
+.control-wrapper .rail {
   position: absolute;
   width: 100%;
   top: 50%;
   transform: translateY(-50%);
   height: 6px;
   border-radius: 3px;
-  background: lightgrey;
+  background: gainsboro;
 }
 
-.inner-rail {
+.control-wrapper .inner-rail {
   position: absolute;
   height: 100%;
   background: blue;
   opacity: 0.5;
 }
 
-.control {
+.control-wrapper .control {
   width: $thumb-size;
   height: $thumb-size;
   border-radius: 50%;
@@ -109,4 +110,22 @@ $thumb-size: 16px;
   margin-left: calc(#{$thumb-size} / -2);
   transform: translate3d(0, -50%, 0);
   z-index: 2;
+}
+
+.control-wrapper .thumb {
+  position: absolute;
+  top: -22px;
+  width: 100%;
+  text-align: center;
+  background: blue;
+  color: white;
+  border-radius: 60% 60% 100% 100%;
+  padding-bottom: 2px;
+  font-size: .9em;
+}
+
+.control-wrapper.disabled .control,
+.control-wrapper.disabled .thumb,
+.control-wrapper.disabled .inner-rail {
+  background-color: darkgray;
 }

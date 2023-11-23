@@ -79,11 +79,18 @@ export default function Calender() {
                             render={({ field: { onChange, value } }) => (
                                 <IntervalsSlider min={1} max={7} step={1} value={value[week]} onChange={(v) => {
                                     onChange(onSliderUpdate(v, getValues('week').value, week))
-                                }} />
+                                }}
+                                    disabled={!formValues.week.value[week].enabled}
+                                />
 
                             )}
                         />
-                        <button type="button" className="pill-white" onClick={() => addOrRemoveInterval(week)} >{formValues.week.value[week].maxValue2 == formValues.week.value[week].minValue2 ? "+" : "-"} </button>
+                        <button type="button" className="pill-white"
+                            onClick={() => addOrRemoveInterval(week)}
+                            disabled={!formValues.week.value[week].enabled}
+                        >
+                            {formValues.week.value[week].maxValue2 == formValues.week.value[week].minValue2 ? "+" : "-"}
+                        </button>
                     </div>)}
                     <div className="flex flex-row-reverse">
                         <button type="submit" className="btn-primary" disabled={!isDirty} >Save Changes</button>
