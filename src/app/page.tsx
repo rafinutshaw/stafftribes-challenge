@@ -4,7 +4,7 @@ import Calender from "./components/calender";
 import Friends from "./components/friends/friends";
 import { getMyAvailability, getMyFriendsAvailability, updateMyAvailability } from "./service/app-service";
 import { AvailabilityType } from "./types/shared.types";
-import { CategoriedFriendsAvailability, FriendAvailability } from "./components/friends/friends.types";
+import { FriendAvailability } from "./components/friends/friends.types";
 
 export default function Home() {
 

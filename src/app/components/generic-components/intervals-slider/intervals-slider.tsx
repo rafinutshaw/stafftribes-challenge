@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import './style.scss'
 import { IntervalProps, IntervalsSliderProps } from "./intervals-slider.types";
+import './style.scss';
 
 export default function IntervalsSlider({ min, max, value, step, onChange, disabled = false }: IntervalsSliderProps) {
     const [state, setState] = useState<IntervalProps>(value);

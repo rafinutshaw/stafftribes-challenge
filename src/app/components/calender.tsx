@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { AvailabilityType } from "../types/shared.types";
 import IntervalsSlider from "./generic-components/intervals-slider/intervals-slider";
 import { IntervalProps } from "./generic-components/intervals-slider/intervals-slider.types";
-import { Controller, useForm } from "react-hook-form";
-import { getMyAvailability, updateMyAvailability } from "../service/app-service";
-import { AvailabilityType } from "../types/shared.types";
 
 export default function Calender(props: any) {
     const { myAvailability, onUpdate } = props
@@ -27,15 +26,12 @@ export default function Calender(props: any) {
     const formValues = watch()
 
     useEffect(() => {
-        console.log(myAvailability)
         if (myAvailability?.length > 0)
             populateAvailability()
     }, [myAvailability])
 
     const populateAvailability = () => {
-        console.log(myAvailability)
         setValue('week.value', myAvailability)
-
     }
 
     const onSubmit = (data: any) => {
@@ -86,16 +82,16 @@ export default function Calender(props: any) {
                                 <IntervalsSlider min={1} max={7} step={1} value={value[week]} onChange={(v) => {
                                     onChange(onSliderUpdate(v, getValues('week').value, week))
                                 }}
-                                    disabled={!formValues.week.value[week].enabled}
+                                    disabled={!formValues.week?.value[week].enabled}
                                 />
 
                             )}
                         />
                         <button type="button" className="pill-white"
                             onClick={() => addOrRemoveInterval(week)}
-                            disabled={!formValues.week.value[week].enabled}
+                            disabled={!formValues.week?.value[week]?.enabled}
                         >
-                            {formValues.week.value[week].maxValue2 == formValues.week.value[week].minValue2 ? "+" : "-"}
+                            {formValues.week?.value[week].maxValue2 == formValues.week?.value[week].minValue2 ? "+" : "-"}
                         </button>
                     </div>)}
                     <div className="flex flex-row-reverse">

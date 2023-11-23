@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { CategoriedFriendsAvailability, DaysAvailability, FriendsProps } from "./friends.types";
 import ToggleGrid from "../generic-components/toggle-grid/toggle-grid";
-import { getMyFriendsAvailability } from "@/app/service/app-service";
 import { ValueType } from "../generic-components/toggle-grid/toggle-grid.types";
 import FriendsAvailabilityTable from "./friends-availability-table";
+import { CategoriedFriendsAvailability, FriendsProps } from "./friends.types";
 
 export default function Friends(props: FriendsProps) {
 
@@ -27,7 +26,6 @@ export default function Friends(props: FriendsProps) {
                 result.moreSerious = { weeks, bestWeek }
             }
         });
-        console.log(friendsAvailability)
         setState(result)
     }
 
@@ -79,16 +77,16 @@ export default function Friends(props: FriendsProps) {
     return (
         <div className="p-4 app-section">
             <div className="flex justify-between items-center  pb-4">
-                <h2 className="text-2xl font-bold uppercase">MY FRIends</h2>
+                <h2 className="text-2xl font-bold uppercase">My Friends</h2>
 
             </div>
             <div>
                 <div className="flex py-4"><span className="mr-2">Available for:</span>   <ToggleGrid name={'availablefor'} values={categoryNames} selected={categoryType} onChange={setCategoryType} /></div>
-                <div className="flex py-4 items-center">
+                <div className="flex py-4 items-center flex-wrap">
                     <span className="mr-2">Available on:</span>
                     <ToggleGrid name={'availableon'} values={getAvailableOnValues()} selected={selectedWeek} onChange={setSelectedWeek} />
 
-                    <select defaultValue={-1} id="countries" className="ml-2 bg-white border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
+                    <select defaultValue={-1} id="countries" className="ml-2 bg-white border text-gray-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2 h-9"
                         onChange={(e) => setSelectedWeek(parseInt(e.target.value))}
                     >
                         <option value={-1} >Choose Week</option>
