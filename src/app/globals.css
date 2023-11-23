@@ -64,3 +64,9 @@ textarea {
 textarea {
     white-space: revert;
 }
+
+textarea:focus,
+input:focus,
+select:focus {
+    outline: none;
+}

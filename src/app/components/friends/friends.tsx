@@ -3,6 +3,7 @@ import { CategoriedFriendsAvailability, DaysAvailability } from "./friends.types
 import ToggleGrid from "../generic-components/toggle-grid/toggle-grid";
 import { getMyFriendsAvailability } from "@/app/service/app-service";
 import { ValueType } from "../generic-components/toggle-grid/toggle-grid.types";
+import FriendsAvailabilityTable from "./friends-availability-table";
 
 export default function Friends(props: any) {
 
@@ -11,6 +12,7 @@ export default function Friends(props: any) {
     const [categoryType, setCategoryType] = useState<number>(1)
     const categoryNames = [{ label: "Just for fun", value: 1 }, { label: "More serious", value: 2 }]
     const [selectedWeek, setSelectedWeek] = useState<number>(-1)
+
     useEffect(() => {
         if (friendsAvailability.length > 0)
             updatefriendsAvailability()
@@ -86,44 +88,16 @@ export default function Friends(props: any) {
                     <span className="mr-2">Available on:</span>
                     <ToggleGrid name={'availableon'} values={getAvailableOnValues()} selected={selectedWeek} onChange={setSelectedWeek} />
 
-                    <select id="countries" className="ml-2 bg-white border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
+                    <select defaultValue={-1} id="countries" className="ml-2 bg-white border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
                         onChange={(e) => setSelectedWeek(parseInt(e.target.value))}
                     >
-                        <option disabled >Choose Week</option>
+                        <option value={-1} >Choose Week</option>
                         {[...Array(7)].map((_, weekIndex) => <option key={weekIndex} value={weekIndex}>Week {weekIndex + 1}</option>)}
 
                     </select>
                 </div>
             </div>
-            <div className="flex flex-col">
-                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                        <div className="overflow-hidden">
-                            <table className="min-w-full text-center text-sm font-light">
-                                <thead
-                                    className="border-b bg-neutral-100 font-medium">
-                                    <tr>
-                                        <th scope="col" className="text-left px-6  py-2">Name</th>
-                                        <th scope="col" className="text-left px-6  py-2">Availability</th>
-                                        <th scope="col" className="text-left px-6  py-2">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {getAvailabilityData()?.map((data: any, index: number) => <tr key={index} className="border-b ">
-                                        <td className="whitespace-nowrap text-left px-6  py-2">{data.name}</td>
-                                        <td className="whitespace-nowrap text-left px-6  py-2">{data.week}</td>
-                                        <td className="whitespace-nowrap text-left px-6  py-2">
-                                            <button type="button" className="btn-outline">View</button>
-                                        </td>
-                                    </tr>)}
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <FriendsAvailabilityTable availabilityData={getAvailabilityData()} />
         </div>
     )
 }

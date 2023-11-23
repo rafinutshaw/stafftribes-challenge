@@ -16,6 +16,7 @@ export default function Calender(props: any) {
         { minValue1: 1, maxValue1: 7, minValue2: 0, maxValue2: 0, enabled: true },
         { minValue1: 1, maxValue1: 7, minValue2: 0, maxValue2: 0, enabled: true },
     ];
+
     const methods = useForm({
         defaultValues: {
             week: { value: defaultValues }
@@ -24,6 +25,7 @@ export default function Calender(props: any) {
 
     const { register, getValues, setValue, control, watch, handleSubmit, formState: { isDirty }, reset } = methods
     const formValues = watch()
+
     useEffect(() => {
         console.log(myAvailability)
         if (myAvailability.length > 0)
