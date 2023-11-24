@@ -45,7 +45,7 @@ export default function Friends(props: FriendsProps) {
             return result
         }
         return availabilityData?.weeks[selectedWeek == 7 ? availabilityData?.bestWeek : selectedWeek].map((item) => {
-            return { name: item.name, week: 'Week ' + (selectedWeek == 7 ? availabilityData?.bestWeek || 0 + 1 : selectedWeek + 1) }
+            return { name: item.name, week: 'Week ' + (selectedWeek == 7 ? (availabilityData?.bestWeek || 0) + 1 : selectedWeek + 1) }
         });
 
     }
