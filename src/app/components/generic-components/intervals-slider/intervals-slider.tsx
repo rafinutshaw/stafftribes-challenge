@@ -71,6 +71,7 @@ export default function IntervalsSlider({ min, max, value, step, onChange, disab
                     min={min}
                     max={max}
                     step={step}
+                    disabled={disabled}
                     onChange={(e) => handleChange(+e.target.value, maxValue1)}
                 />
                 <input
@@ -80,6 +81,7 @@ export default function IntervalsSlider({ min, max, value, step, onChange, disab
                     min={min}
                     max={max}
                     step={step}
+                    disabled={disabled}
                     onChange={(e) => handleChange(minValue1, +e.target.value)}
                 />
                 {(minValue2 != maxValue2) && <> <input
@@ -88,6 +90,7 @@ export default function IntervalsSlider({ min, max, value, step, onChange, disab
                     value={minValue2}
                     min={min}
                     max={max}
+                    disabled={disabled}
                     step={step}
                     onChange={(e) => handleChange2(+e.target.value, maxValue2)}
                 />
@@ -97,6 +100,7 @@ export default function IntervalsSlider({ min, max, value, step, onChange, disab
                         value={maxValue2}
                         min={min}
                         max={max}
+                        disabled={disabled}
                         step={step}
                         onChange={(e) => handleChange2(minValue2, +e.target.value)}
                     /></>}

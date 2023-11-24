@@ -73,7 +73,7 @@ export default function Calender(props: any) {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {[...Array(7)].map((_, week) => <div key={week} className="flex items-center">
                         <span className="whitespace-nowrap">Week {week + 1}</span>
-                        <input {...register(`week.value.${week}.enabled`, {})} type="checkbox" defaultChecked={true} className="mx-4 cursor-pointer" />
+                        <input {...register(`week.value.${week}.enabled`, {})} type="checkbox" checked={formValues.week?.value[week].enabled} className="mx-4 cursor-pointer" />
                         <Controller
                             control={control}
                             defaultValue={defaultValues}
