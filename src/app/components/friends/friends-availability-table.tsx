@@ -8,16 +8,16 @@ export default function FriendsAvailabilityTable({ availabilityData }: any) {
                         <thead
                             className="border-b bg-neutral-100 font-medium">
                             <tr>
-                                <th scope="col" className="text-left px-6  py-2">Name</th>
-                                <th scope="col" className="text-left px-6  py-2">Availability</th>
+                                <th scope="col" className="text-left px-6 w-1/3 py-2">Name</th>
+                                <th scope="col" className="text-left px-6 w-1/3 py-2">Availability</th>
                                 <th scope="col" className="text-left px-6  py-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {availabilityData?.length > 0 && availabilityData?.map((data: any, index: number) => <tr key={index} className="border-b ">
-                                <td className="whitespace-nowrap text-left px-6  py-2">{data.name}</td>
-                                <td className="whitespace-nowrap text-left px-6  py-2">{data.week}</td>
-                                <td className="whitespace-nowrap text-left px-6  py-2">
+                                <td className="whitespace-nowrap text-left px-6 py-2">{data.name}</td>
+                                <td className="whitespace-nowrap text-left px-6 py-2">{data.week}</td>
+                                <td className="whitespace-nowrap text-left px-6 py-2">
                                     <button type="button" className="btn-outline">View</button>
                                 </td>
                             </tr>)}
